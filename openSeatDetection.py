@@ -26,10 +26,10 @@ inputElement.submit()
 try:
     siteSource = driver.page_source
     refinedSource = BeautifulSoup(siteSource, "html.parser")
-    lol = refinedSource.find("table", {"class": "table table-striped"})
+    table = refinedSource.find("table", {"class": "table table-striped"})
 
     dataList = []
-    for sibling in lol.tbody.tr.td.next_siblings:
+    for sibling in table.tbody.tr.td.next_siblings:
         dataList.append(sibling)
     dataList = [str(elem) for elem in dataList]
     dataList = [x.replace(' ', '') for x in dataList]
