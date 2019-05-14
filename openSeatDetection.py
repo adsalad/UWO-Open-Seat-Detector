@@ -1,17 +1,20 @@
 import selenium
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from twilio.rest import Client
 
 account_sid = ""
 auth_token = ""
 client = Client(account_sid, auth_token)
+customOptions = Options()
+customOptions.headless = True
 
 def check_seats(course_number, class_number):
 
     # Create a new instance of the Chrome driver
-    driver = webdriver.Chrome('/Users/User/Downloads/chromedriver')
+    driver = webdriver.Chrome('/Users/User/Downloads/chromedriver', options = customOptions)
 
     # go to the google home page
     driver.get("https://studentservices.uwo.ca/secure/timetables/SummerTT/ttindex.cfm")
