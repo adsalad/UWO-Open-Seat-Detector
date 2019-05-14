@@ -10,7 +10,7 @@ client = Client(account_sid, auth_token)
 
 def check_seats(course_number, class_number):
 
-    # Create a new instance of the Firefox driver
+    # Create a new instance of the Chrome driver
     driver = webdriver.Chrome('/Users/User/Downloads/chromedriver')
 
     # go to the google home page
