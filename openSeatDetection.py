@@ -46,11 +46,19 @@ def check_seats(course_number, class_number):
 
 
 def main():
+     print("""
+       __  ___       ______     ____                      _____            __     ____       __            __            
+      / / / / |     / / __ \   / __ \____  ___  ____     / ___/___  ____ _/ /_   / __ \___  / /____  _____/ /_____  _____
+     / / / /| | /| / / / / /  / / / / __ \/ _ \/ __ \    \__ \/ _ \/ __ `/ __/  / / / / _ \/ __/ _ \/ ___/ __/ __ \/ ___/
+    / /_/ / | |/ |/ / /_/ /  / /_/ / /_/ /  __/ / / /   ___/ /  __/ /_/ / /_   / /_/ /  __/ /_/  __/ /__/ /_/ /_/ / /    
+    \____/  |__/|__/\____/   \____/ .___/\___/_/ /_/   /____/\___/\__,_/\__/  /_____/\___/\__/\___/\___/\__/\____/_/     
+                             /_/                                                                                     
+    """)
     print("Hey! This is a tool that will automatically check and notify you when a course seat opens up.")
     print("First provide us with the 'Course Number', such as '1027' for 'CS1027', and provide us with the 'Class Number' which can be"
           "found manually by searching the timetable \n")
-    courseNumber = input("Type in the Course Number here: ")
-    classNumber = input("And type in the Class Number here: ")
+    courseNumber = input("Type in the Course Number here: \n")
+    classNumber = input("And type in the Class Number here: \n")
     check_seats(courseNumber, classNumber)
 
  main()
