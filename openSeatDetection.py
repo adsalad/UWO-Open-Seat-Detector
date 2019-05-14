@@ -33,8 +33,9 @@ def check_seats(course_number, class_number):
         dataList = [str(elem) for elem in userRows]
 
         if any("Not Full" in x for x in dataList):
-            message = client.messages.create(to="+", from_="+", body="Course is not Full!")
-
+           client.messages.create(to="", from_="", body= course_number + " is not Full! "
+                                                                                                 "Hurry and register!")
+                             
     except selenium.common.exceptions.NoSuchElementException:
         print("Keyword Does Not Exist")
     finally:
@@ -42,7 +43,7 @@ def check_seats(course_number, class_number):
 
 
 def main():
-    print("Hey! This is a tool that will automatically check and notify you when a course seat opens up /n")
+    print("Hey! This is a tool that will automatically check and notify you when a course seat opens up.")
     print("First provide us with the 'Course Number', such as '1027' for 'CS1027', and provide us with the 'Class Number' which can be"
           "found manually by searching the timetable")
     courseNumber = input("Type in the Course Number here: ")
