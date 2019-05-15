@@ -32,7 +32,7 @@ def check_seats(course_number, class_number):
         siteSource = driver.page_source
         refinedSource = BeautifulSoup(siteSource, "html.parser")
         allRows = refinedSource.find_all('tr')
-        userRows = [t for t in alRrows if t.find_all(text=re.compile(class_number))]
+        userRows = [elem for elem in alRrows if elem.find_all(text=re.compile(class_number))]
         dataList = [str(elem) for elem in userRows]
 
         if any("Not Full" in x for x in dataList):
@@ -55,7 +55,7 @@ def main():
                              /_/                                                                                     
     """)
     print("Hey! This is a tool that will automatically check and notify you when a course seat opens up.")
-    print("First provide us with the 'Course Number', such as '1027' for 'CS1027', and provide us with the 'Class Number' which can be"
+    print("First provide us with the 'Course Number', such as '1027' for 'CS1027', and provide us with the 'Class Number' which can be "
           "found manually by searching the timetable \n")
     courseNumber = input("Type in the Course Number here: \n")
     classNumber = input("And type in the Class Number here: \n")
