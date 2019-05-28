@@ -5,42 +5,50 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from twilio.rest import Client
 
+#this is where administrator Twilio credentials go
 account_sid = ""
 auth_token = ""
 client = Client(account_sid, auth_token)
+
+#start Chrome in headless mode so no window pops up when Selenium opens it
 customOptions = Options()
 customOptions.headless = True
 
-def check_seats(course_number, class_number):
+def check_seats(course_number, class_number, studentNumber):
 
-    # Create a new instance of the Chrome driver
+    #create a new instance of the Chrome driver
     driver = webdriver.Chrome('/Users/User/Downloads/chromedriver', options = customOptions)
 
-    # go to the google home page
+    #go to the course searcher home page
     driver.get("https://studentservices.uwo.ca/secure/timetables/SummerTT/ttindex.cfm")
 
-    # find the element that's name attribute is q (the google search box)
+    #find the element that's id attribute is the following... for the search bar
     inputElement = driver.find_element_by_id("inputCatalognbr")
 
-    # type in the search
+    #type in the search
     inputElement.send_keys(course_number)
 
-    # submit the form (although google automatically searches now without submitting)
+    #submit the form 
     inputElement.submit()
-
+    
     try:
+        #extract source after entering keys, using selenium instead of requests due to page being an SPA
+        #find table row with corresponding unique class number and append it as a string to a list
         siteSource = driver.page_source
         refinedSource = BeautifulSoup(siteSource, "html.parser")
         allRows = refinedSource.find_all('tr')
         userRows = [elem for elem in alRrows if elem.find_all(text=re.compile(class_number))]
         dataList = [str(elem) for elem in userRows]
 
+        #if word "Not Full" is found anywhere in the list, send a message to user's phone number
         if any("Not Full" in x for x in dataList):
-           client.messages.create(to="", from_="", body= course_number + " is not Full! "
+           client.messages.create(to="+1" + studentNumber, from_="", body= course_number + " is not Full! "
                                                                          "Hurry and register!")
-                             
+    #if course number does not return results, this exception will be thrown                        
     except selenium.common.exceptions.NoSuchElementException:
         print("Keyword Does Not Exist")
+        
+    #quit driver and close Chrome regardless of error
     finally:
         driver.quit()
 
@@ -59,6 +67,7 @@ def main():
           "found manually by searching the timetable \n")
     courseNumber = input("Type in the Course Number here: \n")
     classNumber = input("And type in the Class Number here: \n")
-    check_seats(courseNumber, classNumber)
+    studentNumber = input("Finally, please enter your phone number, to be notified when a seat opens: \n")
+    check_seats(courseNumber, classNumber, studentNumber)
 
  main()
