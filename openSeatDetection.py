@@ -1,10 +1,10 @@
 import selenium
+import re
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from twilio.rest import Client
-import re
 
 #this is where administrator Twilio credentials go
 account_sid = ""
