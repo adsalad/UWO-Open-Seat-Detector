@@ -4,6 +4,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 from twilio.rest import Client
+import re
 
 #this is where administrator Twilio credentials go
 account_sid = ""
@@ -14,7 +15,7 @@ client = Client(account_sid, auth_token)
 customOptions = Options()
 customOptions.headless = True
 
-def check_seats(course_number, class_number, studentNumber):
+def check_seats(course_number, class_number, student_number):
 
     #create a new instance of the Chrome driver
     driver = webdriver.Chrome('/Users/User/Downloads/chromedriver', options = customOptions)
@@ -37,7 +38,7 @@ def check_seats(course_number, class_number, studentNumber):
         siteSource = driver.page_source
         refinedSource = BeautifulSoup(siteSource, "html.parser")
         allRows = refinedSource.find_all('tr')
-        userRows = [elem for elem in alRrows if elem.find_all(text=re.compile(class_number))]
+        userRows = [elem for elem in allRows if elem.find_all(text=re.compile(class_number))]
         dataList = [str(elem) for elem in userRows]
 
         #if word "Not Full" is found anywhere in the list, send a message to user's phone number
