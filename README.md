@@ -1,7 +1,7 @@
 # UWO-Open-Seat-Detector
 Twilio integrated Python script to check/notify me when a desired seat for a course opens at my university. Program Selenium and BeautifulSoup4 for webscraping. This application is meant to be used as a Cron job.
 
-# Inspiration
+# Motivation
 My main reason for creating this script was to:
 
 - Learn Webscraping libraries
