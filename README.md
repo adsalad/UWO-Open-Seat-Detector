@@ -10,7 +10,3 @@ My main reason for creating this script was to:
 
 I wanted to take a course over the summmer at my university but the course had reached full capacity. I figured I couldn't keep checking the website for an open spot as the possiblility of a seat opening up and disappearing without my knowledge (in a span of say, 5-10 minutes) was a likely possiblity. I therefore decided to automate the process!
 
-# Screenshots
-<img src = "images/image1.png" width = "550" height = "230">
-<img src = "images/image2.jpg" width = "330" height = "300">
-
