@@ -41,12 +41,20 @@ def check_seats(course_number, class_number, student_number):
         wantedRows = [str(elem) for elem in allRows if elem.find_all(text = re.compile(class_number))]
 
         #if word "Not Full" is found anywhere in the list, send a message to user's phone number
+        #if word "Full" is found anywhere in the list, ignore it
+        #if neither of the words are there, then the user entered a wrong course/class number
         if any("Not Full" in elem for elem in wantedRows):
            client.messages.create(to="+1" + student_number, from_="", body= course_number + " is not Full! "
                                                                          "Hurry and register!")
-    #if course number does not return results, this exception will be thrown                        
+        elif any("Full" in elem for elem in wantedRows):
+            pass
+        else:
+            client.messages.create(to="+1" + student_number, from_="+14373725709",
+                                   body="Your Course Number or Class Number, " + course_number + " or " + class_number + ", is invalid.")
+
+    #if no element matches the searchbar element, throw exception to admin                      
     except selenium.common.exceptions.NoSuchElementException:
-        print("Keyword Does Not Exist")
+        pass
         
     #quit driver and close Chrome regardless of error
     finally:
@@ -67,7 +75,7 @@ def main():
           "found manually by searching the timetable \n")
     courseNumber = input("Type in the Course Number here: \n")
     classNumber = input("And type in the Class Number here: \n")
-    studentNumber = input("Finally, please enter your phone number, to be notified when a seat opens: \n")
+    studentNumber = input("Finally, please enter the phone number, to be notified when a seat opens: \n")
     check_seats(courseNumber, classNumber, studentNumber)
 
  main()
