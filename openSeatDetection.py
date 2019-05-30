@@ -38,12 +38,12 @@ def check_seats(course_number, class_number, student_number):
         siteSource = driver.page_source
         refinedSource = BeautifulSoup(siteSource, "html.parser")
         allRows = refinedSource.find_all('tr')
-        userRows = [elem for elem in allRows if elem.find_all(re.compile(class_number))]
+        userRows = [elem for elem in allRows if elem.find_all(text = re.compile(class_number))]
         dataList = [str(elem) for elem in userRows]
 
         #if word "Not Full" is found anywhere in the list, send a message to user's phone number
         if any("Not Full" in x for x in dataList):
-           client.messages.create(to="+1" + studentNumber, from_="", body= course_number + " is not Full! "
+           client.messages.create(to="+1" + student_number, from_="", body= course_number + " is not Full! "
                                                                          "Hurry and register!")
     #if course number does not return results, this exception will be thrown                        
     except selenium.common.exceptions.NoSuchElementException:
