@@ -53,8 +53,8 @@ def check_seats(course_number, class_number, student_number):
                                    body="Your Course Number or Class Number, " + course_number + " or " + class_number + ", is invalid.")
 
     #if no element matches the searchbar element, throw exception to admin                      
-    except selenium.common.exceptions.NoSuchElementException:
-        pass
+    except selenium.common.exceptions.NoSuchElementException as e:
+        print(e)
         
     #quit driver and close Chrome regardless of error
     finally:
