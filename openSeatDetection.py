@@ -41,7 +41,7 @@ def check_seats(course_number, class_number, student_number):
         wantedRows = [str(elem) for elem in allRows if elem.find_all(text = re.compile(class_number))]
 
         #if word "Not Full" is found anywhere in the list, send a message to user's phone number
-        if any("Not Full" in x for x in wantedRows):
+        if any("Not Full" in elem for elem in wantedRows):
            client.messages.create(to="+1" + student_number, from_="", body= course_number + " is not Full! "
                                                                          "Hurry and register!")
     #if course number does not return results, this exception will be thrown                        
