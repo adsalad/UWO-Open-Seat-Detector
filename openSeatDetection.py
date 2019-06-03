@@ -75,7 +75,7 @@ def main():
           "found manually by searching the timetable \n")
     courseNumber = input("Type in the Course Number here: \n")
     classNumber = input("And type in the Class Number here: \n")
-    studentNumber = input("Finally, please enter the phone number, to be notified when a seat opens: \n")
-    check_seats(courseNumber, classNumber, studentNumber)
+    userPhoneNumber = input("Finally, please enter the phone number, to be notified when a seat opens: \n")
+    check_seats(courseNumber, classNumber, userPhoneNumber)
 
  main()
